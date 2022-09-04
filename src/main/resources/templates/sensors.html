@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>List Sensors</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container-fluid text-center">
+  <h2>List of Sensors</h2>
+  <div>
+    <a class="h3" th:href="@{sensors/new}">Add new Sensor</a>
+  </div>
+  <div th:if="${message}" class="alert alert-success text-center">
+    [[${message}]]
+  </div>
+  <div>
+    <table class="table table-bordered">
+    <thead class="thead-dark">
+    <th>Id</th>
+    <th>Name</th>
+    <th>Model</th>
+    <th>RangeFrom</th>
+    <th>RangeTo</th>
+    <th>Type</th>
+    <th>Unit</th>
+    <th>Location</th>
+    <th>Description</th>
+    </thead>
+      <tbody>
+      <th:block th:each="sensor : ${listSensors}">
+        <tr>
+          <td>[[${sensor.Id}]]</td>
+          <td>[[${sensor.Name}]]</td>
+          <td>[[${sensor.Model}]]</td>
+          <td>[[${sensor.RangeFrom}]]</td>
+          <td>[[${sensor.RangeTo}]]</td>
+          <td>[[${sensor.Type}]]</td>
+          <td>[[${sensor.Unit}]]</td>
+          <td>[[${sensor.Location}]]</td>
+          <td>
+            <a class="h4" th:href="@{'sensors/edit/' + ${sensor.id}}">Edit</a>
+            <a class="h4" th:href="@{'sensors/delete/' + ${sensor.id}}">Delete</a>
+          </td>
+        </tr>
+      </th:block>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

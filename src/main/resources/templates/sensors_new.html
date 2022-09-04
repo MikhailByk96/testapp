@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${pageTitle}]]</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container-fluid text-center">
+<h2>[[${pageTitle}]]</h2>
+    <form th:action="@{/sensors/save}" method="post" th:object="${sensor}"
+    style="max-width: 700px; margin: 0 auto">
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Name:</label>
+                <div class="col-sm-8"> <input type="text" th:field="*{name}" required minlength="1" maxlength="30"></div>
+
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Model:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{model}" required minlength="1" maxlength="15">
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">RangeFrom:</label>
+                <div class="col-sm-8"><input type="number" th:field="*{rangeFrom}"></div>
+
+            </div>
+            <div class="form-group row">
+                 <label class="col-sm-4 col-form-label">RangeTo:</label>
+                <div class="col-sm-8"><input type="number" th:field="*{rangeTo}" ></div>
+
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Type:</label>
+                <div class="col-sm-8"><input name="type" list="types" th:field="*{type}"></div>
+                <datalist id="types">
+                    <option value="Pressure"></option>
+                    <option value="Voltage"></option>
+                    <option value="Temperature"></option>
+                    <option value="Humidity"></option>
+                </datalist>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Unit:</label>
+                <div class="col-sm-8"><input name="unit" list="units" th:field="*{unit}"></div>
+                <datalist id="units">
+                    <option value="bar"></option>
+                    <option value="voltage"></option>
+                    <option value="°C"></option>
+                    <option value="%"></option>
+                </datalist>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Location:</label>
+                <div class="col-sm-8"><input type="text" th:field="*{location}" required minlength="1" maxlength="40"></div>
+
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary m-2">Save</button>
+                <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function cancelForm(){
+        window.location = "[[@{/sensors}]]";
+    }
+</script>
+</body>
+</html>
